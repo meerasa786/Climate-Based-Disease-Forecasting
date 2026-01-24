@@ -1,0 +1,203 @@
+📘 Flask CI/CD Pipeline – Exact Project Notes
+🔹 Project Name
+
+Flask CI/CD using Jenkins, GitHub, Docker & Docker Hub
+
+🔹 Objective
+To build a complete CI/CD pipeline that:
+
+Pulls code from GitHub
+
+Builds a Docker image for a Flask app
+
+Runs automated tests
+
+Pushes the image to Docker Hub
+
+Prepares the app for deployment
+
+🔹 Tools & Technologies Used
+
+Git & GitHub – Source code management
+
+Jenkins – CI/CD automation
+
+Docker – Containerization
+
+Docker Hub – Image registry
+
+Flask – Python web framework
+
+Pytest – Automated testing
+
+Ubuntu (EC2) – Jenkins server
+
+🔹 Project Architecture
+GitHub → Jenkins → Docker Build → Test → Docker Hub
+
+🔹 Step-by-Step What We Did
+1️⃣ Created Flask Application
+
+Developed a simple Flask app
+
+Added unit tests using pytest
+
+Application runs on port 5000
+
+2️⃣ Dockerized the Flask App
+
+Created a Dockerfile:
+
+Base image: python:3.9-alpine
+
+Installed dependencies
+
+Copied application code
+
+Exposed Flask app using container port 5000
+
+3️⃣ Pushed Code to GitHub
+
+Repository: Dev-project-1
+
+Branch: master
+
+Stored:
+
+Flask app
+
+Tests
+
+Dockerfile
+
+Jenkinsfile
+
+4️⃣ Installed & Configured Jenkins
+
+Jenkins installed on Ubuntu EC2
+
+Required plugins installed:
+
+Git
+
+Pipeline
+
+Credentials Binding
+
+Jenkins job created using Pipeline from SCM
+
+5️⃣ Configured Jenkins Credentials
+🔐 GitHub Credentials
+
+Used HTTPS authentication
+
+Jenkins used stored GitHub credentials for SCM checkout
+
+🔐 Docker Hub Credentials
+
+Created Docker Hub Personal Access Token (PAT)
+
+Added in Jenkins as:
+
+Type: Username & Password
+
+Credential ID: dockerhub-creds
+
+Username: meera786
+
+Password: Docker Hub PAT
+
+6️⃣ Created Jenkins Pipeline (Jenkinsfile)
+
+pipeline: sourcecode+dockerfile--dockerimage--tetimg--deploy to dockerhub
+
+🧱 Build Stage
+
+Built Docker image:
+
+docker build -t my-flask-app .
+
+
+Tagged image:
+
+docker tag my-flask-app meera786/my-flask-app:latest
+
+🧪 Test Stage
+
+Ran containerized tests:
+
+docker run my-flask-app python -m pytest app/tests/
+
+
+All tests passed successfully
+
+🚀 Deploy (Push) Stage
+
+Logged in to Docker Hub using Jenkins credentials
+
+Pushed image to Docker Hub:
+
+docker push meera786/my-flask-app:latest
+
+🧹 Post Actions
+
+Logged out from Docker Hub for security
+
+7️⃣ Fixed Major Issues During Pipeline
+
+✔ GitHub authentication (PAT vs password)
+✔ Jenkins credentials ID mismatch
+✔ Docker Hub authentication failure
+✔ Merge conflicts in Jenkinsfile
+✔ Docker login using PAT instead of password
+
+8️⃣ Final Successful Pipeline Result
+
+✔ Jenkins job ran successfully
+✔ Docker image built
+✔ Tests passed
+✔ Image pushed to Docker Hub
+✔ Pipeline status: SUCCESS
+
+🔹 Docker Hub Output
+
+Repository: meera786/my-flask-app
+
+Tag: latest
+
+Image pushed successfully
+
+🔹 How to Access the Flask App
+
+After deployment:
+
+docker run -d -p 5000:5000 meera786/my-flask-app:latest
+
+
+Access via browser:
+
+http://<EC2_PUBLIC_IP>:5000
+
+🔹 Key DevOps Concepts Covered
+
+CI/CD pipeline design
+
+Jenkins declarative pipeline
+
+Secure credential management
+
+Docker containerization
+
+Automated testing
+
+Artifact versioning
+
+Image registry usage
+
+🔹 Resume-Ready Description
+
+Built a complete CI/CD pipeline using Jenkins that automates Docker image build, testing, and publishing of a Flask application to Docker Hub using secure credentials and personal access tokens.
+
+🔹 Interview One-Line Summary
+
+Implemented an end-to-end Jenkins CI/CD pipeline for a Dockerized Flask application with automated testing and Docker Hub deployment.
